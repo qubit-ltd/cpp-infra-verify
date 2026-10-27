@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: Apache-2.0
+# Project-owned: created only by init when missing; ordinary updates preserve it.
+schema = 1
+required_suites = ["build", "test"]
+configure_timeout_seconds = 300
+build_timeout_seconds = 1800
+test_timeout_seconds = 600
+jobs = 4
+
+# Enable after selecting the project's public include roots and target names.
+# [headers]
+# roots = ["include"]
+# targets = ["example"]
+# exclude = []
+
+# Library/header-only projects must fill in this block before verification.
+# Use the actual exported package/target/header and a project-owned consumer.
+# [install]
+# package = "Example"
+# targets = ["Example::Example"]
+# headers = ["example/example.hpp"]
+# consumer_source = "tests/infra/consumer.cpp"
+# run_consumer = true
+
+# For applications, use installed executable paths instead of package/targets.
+# [install]
+# executables = ["bin/example"]
+# smoke_args = []
+# run_consumer = true
+
+# Enable with a committed CPack preset that explicitly selects ZIP/TGZ.
+# [package]
+# preset = "infra-package"
+# required_files = ["include/example/example.hpp"]

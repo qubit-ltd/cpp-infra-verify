@@ -1,0 +1,36 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "cpp-infra-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/infra/${presetName}",
+      "cacheVariables": {"CMAKE_CXX_STANDARD": "20", "CMAKE_BUILD_TYPE": "Debug"}
+    },
+    {
+      "name": "cpp-infra-analysis",
+      "hidden": true,
+      "inherits": "cpp-infra-base",
+      "cacheVariables": {"CMAKE_CXX_COMPILER": "clang++-18", "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"}
+    },
+    {
+      "name": "cpp-infra-asan",
+      "hidden": true,
+      "inherits": "cpp-infra-analysis",
+      "cacheVariables": {"CPP_INFRA_SANITIZERS": "address,undefined"}
+    },
+    {
+      "name": "cpp-infra-tsan",
+      "hidden": true,
+      "inherits": "cpp-infra-analysis",
+      "cacheVariables": {"CPP_INFRA_SANITIZERS": "thread"}
+    },
+    {
+      "name": "cpp-infra-fuzz",
+      "hidden": true,
+      "inherits": "cpp-infra-analysis",
+      "cacheVariables": {"CPP_INFRA_FUZZER": "ON"}
+    }
+  ]
+}

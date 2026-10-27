@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "source": "cmake/verify.cmake",
+      "target": "policy/verify.cmake",
+      "sha256": "b86585f85f152f7e1764dd06b36dc765dd46555a65ef41ce0cf2ecf04050d289",
+      "executable": false
+    },
+    {
+      "source": "presets/verify.json",
+      "target": "policy/presets.json",
+      "sha256": "4781afca799a5ef874626327d3a1951a999ce54c2ae7aea68bd18351ca890c60",
+      "executable": false
+    }
+  ],
+  "project_files": [
+    {
+      "source": "project/config.toml",
+      "target": ".infra/verify/config.toml",
+      "sha256": "b2c04fcb6fab4e7eb72bd7c8b695bd800f51c53330ace4a4cdc5d78c01b554da",
+      "executable": false
+    }
+  ]
+}

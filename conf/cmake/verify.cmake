@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0
+# Call these helpers for project-owned targets in dedicated preset profiles.
+function(cpp_infra_sanitizers target)
+  if(NOT CPP_INFRA_SANITIZERS)
+    return()
+  endif()
+  if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux" OR NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(FATAL_ERROR "cpp-infra sanitizer profiles require Linux Clang")
+  endif()
+  if(NOT CPP_INFRA_SANITIZERS STREQUAL "address,undefined" AND
+     NOT CPP_INFRA_SANITIZERS STREQUAL "thread")
+    message(FATAL_ERROR "Use address,undefined or thread in separate profiles")
+  endif()
+  target_compile_options(${target} PRIVATE "-fsanitize=${CPP_INFRA_SANITIZERS}" -fno-omit-frame-pointer)
+  target_link_options(${target} PRIVATE "-fsanitize=${CPP_INFRA_SANITIZERS}")
+endfunction()
+
+function(cpp_infra_fuzzer target)
+  if(NOT CPP_INFRA_FUZZER)
+    return()
+  endif()
+  if(NOT CMAKE_SYSTEM_NAME STREQUAL "Linux" OR NOT CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(FATAL_ERROR "cpp-infra libFuzzer profiles require Linux Clang")
+  endif()
+  target_compile_options(${target} PRIVATE -fsanitize=fuzzer-no-link,address -fno-omit-frame-pointer)
+  target_link_options(${target} PRIVATE -fsanitize=fuzzer,address)
+endfunction()
