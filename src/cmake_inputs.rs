@@ -377,6 +377,9 @@ impl CmakeInputs {
                 self.artifact(&actual, "cmake-tool")?;
                 continue;
             }
+            if item["isExternal"] == true {
+                continue;
+            }
             let internal = item["isGenerated"] == true && crate::cmake_engine::owns(&self.binary, &version, &actual);
             if internal {
                 self.artifact(&path, "cmake-generated")?;
